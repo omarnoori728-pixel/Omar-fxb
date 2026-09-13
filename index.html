@@ -1,0 +1,1362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>omar fxb</title>
+
+<style>
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+body{
+    min-height:100vh;
+    overflow:hidden;
+
+    background:
+    radial-gradient(
+        circle at 50% 15%,
+        #152d58 0%,
+        #080b16 38%,
+        #020205 80%
+    );
+
+    color:white;
+    font-family:Arial,sans-serif;
+}
+
+
+/* PARTICLES */
+
+#particles{
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+}
+
+.particle{
+    position:absolute;
+
+    width:2px;
+    height:2px;
+
+    border-radius:50%;
+
+    background:white;
+
+    opacity:.3;
+}
+
+
+/* LOGO */
+
+.logo{
+    position:fixed;
+
+    top:22px;
+    left:22px;
+
+    z-index:50;
+
+    font-size:16px;
+    font-weight:900;
+
+    letter-spacing:2px;
+
+    color:#2196ff;
+
+    text-shadow:
+    0 0 12px currentColor;
+
+    transition:
+    color .5s,
+    text-shadow .5s;
+}
+
+
+/* PAGES */
+
+.page{
+    position:absolute;
+
+    inset:0;
+
+    display:none;
+
+    align-items:center;
+    justify-content:center;
+
+    text-align:center;
+
+    padding:25px;
+}
+
+.page.active{
+    display:flex;
+
+    animation:
+    pageIn .45s ease;
+}
+
+
+/* HOME */
+
+.homeBox{
+    width:100%;
+    max-width:500px;
+}
+
+.welcome{
+    font-size:
+    clamp(45px,11vw,72px);
+
+    font-weight:900;
+
+    letter-spacing:5px;
+
+    color:#2196ff;
+
+    text-shadow:
+    0 0 10px #2196ff,
+    0 0 28px #2196ff;
+
+    animation:
+    softGlow 2.5s infinite alternate;
+}
+
+.subtitle{
+    margin-top:14px;
+
+    color:#8f98aa;
+
+    letter-spacing:3px;
+
+    font-size:12px;
+}
+
+
+/* LANGUAGE */
+
+.languageTitle{
+    margin-top:28px;
+
+    color:#777;
+
+    font-size:12px;
+
+    letter-spacing:2px;
+}
+
+.language{
+    display:flex;
+
+    justify-content:center;
+
+    gap:9px;
+
+    margin-top:12px;
+}
+
+.language button{
+    padding:9px 18px;
+
+    font-size:12px;
+
+    background:#111827;
+
+    border:1px solid #252b38;
+
+    box-shadow:none;
+}
+
+.language button.selected{
+    background:#2196ff;
+
+    border-color:#2196ff;
+}
+
+
+/* BUTTONS */
+
+button{
+    border:0;
+
+    padding:14px 34px;
+
+    border-radius:50px;
+
+    color:white;
+
+    background:#2196ff;
+
+    font-size:15px;
+
+    font-weight:bold;
+
+    letter-spacing:1px;
+
+    cursor:pointer;
+
+    box-shadow:
+    0 0 20px rgba(33,150,243,.35);
+
+    transition:
+    transform .2s;
+}
+
+button:hover{
+    transform:scale(1.05);
+}
+
+button:active{
+    transform:scale(.95);
+}
+
+.enterBtn{
+    margin-top:28px;
+}
+
+
+/* CARD */
+
+.card{
+    width:100%;
+
+    max-width:410px;
+
+    padding:32px 23px;
+
+    border-radius:25px;
+
+    background:
+    rgba(7,9,18,.82);
+
+    border:
+    1px solid rgba(255,255,255,.1);
+
+    backdrop-filter:blur(10px);
+
+    box-shadow:
+    0 0 35px rgba(33,150,243,.1);
+}
+
+.cardTitle{
+    font-size:27px;
+
+    font-weight:900;
+
+    margin-bottom:9px;
+}
+
+.cardSub{
+    color:#888;
+
+    font-size:13px;
+
+    margin-bottom:23px;
+}
+
+
+/* INPUT */
+
+input{
+    width:100%;
+
+    padding:15px;
+
+    margin:6px 0;
+
+    border-radius:14px;
+
+    border:1px solid #292929;
+
+    background:#090a0f;
+
+    color:white;
+
+    outline:none;
+
+    font-size:16px;
+}
+
+input:focus{
+    border-color:#2196ff;
+}
+
+.continueBtn{
+    margin-top:16px;
+
+    width:100%;
+}
+
+.error{
+    color:#ff416c;
+
+    margin-top:11px;
+
+    font-size:13px;
+}
+
+
+/* PERSONAL WELCOME */
+
+.userName{
+    font-size:
+    clamp(36px,10vw,65px);
+
+    font-weight:900;
+
+    color:#9c4dff;
+
+    text-shadow:
+    0 0 10px #9c4dff,
+    0 0 30px #9c4dff;
+}
+
+.userText{
+    margin-top:16px;
+
+    color:#aaa;
+
+    line-height:1.7;
+
+    font-size:14px;
+}
+
+.goBtn{
+    margin-top:27px;
+
+    background:#9c4dff;
+}
+
+
+/* MENU */
+
+.menuTitle{
+    font-size:35px;
+
+    font-weight:900;
+
+    color:#ff315d;
+
+    text-shadow:
+    0 0 10px #ff315d,
+    0 0 25px #ff315d;
+}
+
+.menuWelcome{
+    color:#aaa;
+
+    margin-top:8px;
+}
+
+.menuSub{
+    color:#777;
+
+    margin:
+    9px 0 25px;
+
+    font-size:13px;
+}
+
+.menu{
+    display:flex;
+
+    flex-direction:column;
+
+    gap:10px;
+}
+
+.menu button{
+    width:100%;
+}
+
+.about{
+    background:#2196ff;
+}
+
+
+/* ABOUT */
+
+.aboutTitle{
+    font-size:42px;
+
+    font-weight:900;
+
+    color:#2196ff;
+
+    text-shadow:
+    0 0 10px #2196ff,
+    0 0 28px #2196ff;
+}
+
+.aboutText{
+    margin-top:20px;
+
+    color:#aaa;
+
+    font-size:14px;
+
+    line-height:1.8;
+}
+
+.aboutText b{
+    color:white;
+}
+
+
+/* BETA */
+
+.beta{
+    margin-top:25px;
+
+    display:inline-block;
+
+    padding:7px 17px;
+
+    border-radius:30px;
+
+    border:
+    1px solid #19c96b;
+
+    color:#19c96b;
+
+    font-size:11px;
+
+    font-weight:bold;
+
+    letter-spacing:3px;
+
+    box-shadow:
+    0 0 15px rgba(25,201,107,.2);
+}
+
+
+/* COMING SOON */
+
+.coming{
+    margin-top:16px;
+
+    color:#19c96b;
+
+    font-size:18px;
+
+    font-weight:bold;
+
+    letter-spacing:2px;
+
+    text-shadow:
+    0 0 15px rgba(25,201,107,.5);
+}
+
+
+/* BACK */
+
+.backBtn{
+    margin-top:25px;
+
+    background:#333;
+
+    box-shadow:none;
+}
+
+
+/* RTL */
+
+[dir="rtl"] .logo{
+    left:auto;
+
+    right:22px;
+}
+
+[dir="rtl"] .welcome{
+    letter-spacing:1px;
+}
+
+[dir="rtl"] .subtitle,
+[dir="rtl"] .languageTitle{
+    letter-spacing:0;
+}
+
+
+/* ANIMATIONS */
+
+@keyframes pageIn{
+
+    from{
+        opacity:0;
+
+        transform:
+        translateY(18px);
+    }
+
+    to{
+        opacity:1;
+
+        transform:
+        translateY(0);
+    }
+}
+
+@keyframes softGlow{
+
+    from{
+        opacity:.85;
+    }
+
+    to{
+        opacity:1;
+    }
+}
+
+
+/* MOBILE */
+
+@media(max-width:500px){
+
+    .logo{
+        top:17px;
+
+        left:18px;
+
+        font-size:14px;
+    }
+
+    [dir="rtl"] .logo{
+        left:auto;
+
+        right:18px;
+    }
+
+    .card{
+        padding:
+        29px 20px;
+    }
+}
+
+</style>
+</head>
+
+
+<body>
+
+
+<div id="particles"></div>
+
+
+<div class="logo" id="logo">
+    omar fxb
+</div>
+
+
+
+<!-- ================= HOME ================= -->
+
+<section
+    id="home"
+    class="page active"
+>
+
+    <div class="homeBox">
+
+        <div
+            class="welcome"
+            id="welcomeText"
+        >
+            WELCOME
+        </div>
+
+
+        <div
+            class="subtitle"
+            id="subtitleText"
+        >
+            ENTER THE EXPERIENCE
+        </div>
+
+
+        <div
+            class="languageTitle"
+            id="languageTitle"
+        >
+            CHOOSE YOUR LANGUAGE
+        </div>
+
+
+        <div class="language">
+
+            <button
+                id="enBtn"
+                class="selected"
+                onclick="setLanguage('en')"
+            >
+                English
+            </button>
+
+
+            <button
+                id="faBtn"
+                onclick="setLanguage('fa')"
+            >
+                فارسی
+            </button>
+
+        </div>
+
+
+        <button
+            class="enterBtn"
+            id="enterBtn"
+            onclick="showPage('login')"
+        >
+            ENTER →
+        </button>
+
+    </div>
+
+</section>
+
+
+
+<!-- ================= LOGIN ================= -->
+
+<section
+    id="login"
+    class="page"
+>
+
+    <div class="card">
+
+        <div
+            class="cardTitle"
+            id="loginTitle"
+        >
+            WHO ARE YOU?
+        </div>
+
+
+        <div
+            class="cardSub"
+            id="loginSub"
+        >
+            Enter your name to continue.
+        </div>
+
+
+        <input
+            id="name"
+            type="text"
+            placeholder="Your name"
+            autocomplete="off"
+        >
+
+
+        <input
+            id="password"
+            type="password"
+            placeholder="Password"
+        >
+
+
+        <button
+            class="continueBtn"
+            id="continueBtn"
+            onclick="login()"
+        >
+            CONTINUE →
+        </button>
+
+
+        <div
+            id="error"
+            class="error"
+        ></div>
+
+    </div>
+
+</section>
+
+
+
+<!-- ================= USER WELCOME ================= -->
+
+<section
+    id="welcomeUser"
+    class="page"
+>
+
+    <div class="homeBox">
+
+        <div class="userName">
+
+            <span id="welcomeWord">
+                Welcome
+            </span>,
+
+            <span id="displayName"></span>
+
+            👋
+
+        </div>
+
+
+        <div
+            class="userText"
+            id="userText"
+        >
+            Welcome to your personal experience.
+            <br>
+            Everything starts here.
+        </div>
+
+
+        <button
+            class="goBtn"
+            id="goBtn"
+            onclick="showPage('menu')"
+        >
+            LET'S GO →
+        </button>
+
+    </div>
+
+</section>
+
+
+
+<!-- ================= MENU ================= -->
+
+<section
+    id="menu"
+    class="page"
+>
+
+    <div class="card">
+
+        <div class="menuTitle">
+
+            <span id="menuName"></span>
+
+        </div>
+
+
+        <div
+            class="menuWelcome"
+            id="menuWelcome"
+        >
+            Welcome to the experience.
+        </div>
+
+
+        <div
+            class="menuSub"
+            id="menuSub"
+        >
+            Choose what you want to explore.
+        </div>
+
+
+        <div class="menu">
+
+            <button
+                class="about"
+                id="aboutBtn"
+                onclick="showPage('about')"
+            >
+                ✦ ABOUT
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- ================= ABOUT ================= -->
+
+<section
+    id="about"
+    class="page"
+>
+
+    <div class="homeBox">
+
+
+        <div class="aboutTitle">
+            OMAR FXB
+        </div>
+
+
+        <div
+            class="aboutText"
+            id="aboutText"
+        >
+
+            <b>
+                A personal digital experience.
+            </b>
+
+            <br><br>
+
+            Designed and created by Omar.
+
+            <br><br>
+
+            This website is a small space
+            built to explore ideas,
+            creativity and technology.
+
+            <br><br>
+
+            More is coming.
+
+        </div>
+
+
+        <div class="beta">
+            BETA
+        </div>
+
+
+        <div
+            class="coming"
+            id="comingText"
+        >
+            COMING SOON — 2027 ✨
+        </div>
+
+
+        <!-- مستقیم به صفحه اول -->
+
+        <button
+            class="backBtn"
+            id="backBtn"
+            onclick="showPage('home')"
+        >
+            ← BACK
+        </button>
+
+
+    </div>
+
+</section>
+
+
+
+<script>
+
+
+/* ================= SETTINGS ================= */
+
+const correctPassword = "fx486$";
+
+let userName = "";
+
+let currentLanguage = "en";
+
+
+
+/* ================= TRANSLATIONS ================= */
+
+const translations = {
+
+    en:{
+
+        welcome:
+        "WELCOME",
+
+        subtitle:
+        "ENTER THE EXPERIENCE",
+
+        choose:
+        "CHOOSE YOUR LANGUAGE",
+
+
+        loginTitle:
+        "WHO ARE YOU?",
+
+        loginSub:
+        "Enter your name to continue.",
+
+        namePlaceholder:
+        "Your name",
+
+        passwordPlaceholder:
+        "Password",
+
+        continue:
+        "CONTINUE →",
+
+
+        nameError:
+        "Please enter your name.",
+
+        wrongPassword:
+        "Wrong password.",
+
+
+        welcomeWord:
+        "Welcome",
+
+        userText:
+        "Welcome to your personal experience.<br>Everything starts here.",
+
+        letsGo:
+        "LET'S GO →",
+
+
+        menuWelcome:
+        "Welcome to the experience.",
+
+        menuSub:
+        "Choose what you want to explore.",
+
+        about:
+        "✦ ABOUT",
+
+
+        aboutText:
+        "<b>A personal digital experience.</b>" +
+        "<br><br>" +
+        "Designed and created by Omar." +
+        "<br><br>" +
+        "This website is a small space " +
+        "built to explore ideas, creativity and technology." +
+        "<br><br>" +
+        "More is coming.",
+
+
+        coming:
+        "COMING SOON — 2027 ✨",
+
+        back:
+        "← BACK"
+
+    },
+
+
+    fa:{
+
+        welcome:
+        "خوش آمدید",
+
+        subtitle:
+        "وارد تجربه شوید",
+
+        choose:
+        "زبان خود را انتخاب کنید",
+
+
+        loginTitle:
+        "شما کی هستید؟",
+
+        loginSub:
+        "برای ادامه نام خود را وارد کنید.",
+
+        namePlaceholder:
+        "نام شما",
+
+        passwordPlaceholder:
+        "رمز عبور",
+
+        continue:
+        "ادامه ←",
+
+
+        nameError:
+        "لطفاً نام خود را وارد کنید.",
+
+        wrongPassword:
+        "رمز عبور اشتباه است.",
+
+
+        welcomeWord:
+        "خوش آمدی",
+
+        userText:
+        "به تجربه شخصی خودت خوش آمدی.<br>" +
+        "همه چیز از اینجا شروع می‌شود.",
+
+        letsGo:
+        "بزن بریم ←",
+
+
+        menuWelcome:
+        "به این تجربه خوش آمدی.",
+
+        menuSub:
+        "چیزی را که می‌خواهی انتخاب کن.",
+
+        about:
+        "✦ درباره",
+
+
+        aboutText:
+        "<b>یک تجربه دیجیتال شخصی.</b>" +
+        "<br><br>" +
+        "طراحی و ساخته شده توسط Omar." +
+        "<br><br>" +
+        "این وب‌سایت فضایی کوچک برای " +
+        "ایده‌ها، خلاقیت و تکنولوژی است." +
+        "<br><br>" +
+        "چیزهای بیشتری در راه است.",
+
+
+        coming:
+        "به‌زودی — ۲۰۲۷ ✨",
+
+        back:
+        "← بازگشت"
+
+    }
+
+};
+
+
+
+/* ================= LANGUAGE ================= */
+
+function setLanguage(lang){
+
+    currentLanguage = lang;
+
+    const t =
+    translations[lang];
+
+
+    document.documentElement.lang =
+    lang;
+
+
+    if(lang === "fa"){
+
+        document.documentElement.dir =
+        "rtl";
+
+    }else{
+
+        document.documentElement.dir =
+        "ltr";
+
+    }
+
+
+    document.getElementById(
+        "welcomeText"
+    ).innerText =
+    t.welcome;
+
+
+    document.getElementById(
+        "subtitleText"
+    ).innerText =
+    t.subtitle;
+
+
+    document.getElementById(
+        "languageTitle"
+    ).innerText =
+    t.choose;
+
+
+    document.getElementById(
+        "loginTitle"
+    ).innerText =
+    t.loginTitle;
+
+
+    document.getElementById(
+        "loginSub"
+    ).innerText =
+    t.loginSub;
+
+
+    document.getElementById(
+        "name"
+    ).placeholder =
+    t.namePlaceholder;
+
+
+    document.getElementById(
+        "password"
+    ).placeholder =
+    t.passwordPlaceholder;
+
+
+    document.getElementById(
+        "continueBtn"
+    ).innerText =
+    t.continue;
+
+
+    document.getElementById(
+        "welcomeWord"
+    ).innerText =
+    t.welcomeWord;
+
+
+    document.getElementById(
+        "userText"
+    ).innerHTML =
+    t.userText;
+
+
+    document.getElementById(
+        "goBtn"
+    ).innerText =
+    t.letsGo;
+
+
+    document.getElementById(
+        "menuWelcome"
+    ).innerText =
+    t.menuWelcome;
+
+
+    document.getElementById(
+        "menuSub"
+    ).innerText =
+    t.menuSub;
+
+
+    document.getElementById(
+        "aboutBtn"
+    ).innerText =
+    t.about;
+
+
+    document.getElementById(
+        "aboutText"
+    ).innerHTML =
+    t.aboutText;
+
+
+    document.getElementById(
+        "comingText"
+    ).innerText =
+    t.coming;
+
+
+    document.getElementById(
+        "backBtn"
+    ).innerText =
+    t.back;
+
+
+    document.getElementById(
+        "enBtn"
+    ).classList.toggle(
+        "selected",
+        lang === "en"
+    );
+
+
+    document.getElementById(
+        "faBtn"
+    ).classList.toggle(
+        "selected",
+        lang === "fa"
+    );
+
+}
+
+
+
+/* ================= PAGE ================= */
+
+function showPage(id){
+
+    document
+    .querySelectorAll(".page")
+    .forEach(page=>{
+
+        page.classList.remove(
+            "active"
+        );
+
+    });
+
+
+    document
+    .getElementById(id)
+    .classList.add("active");
+
+
+    changeLogoColor(id);
+
+}
+
+
+
+/* ================= LOGIN ================= */
+
+function login(){
+
+    const name =
+    document
+    .getElementById("name")
+    .value
+    .trim();
+
+
+    const password =
+    document
+    .getElementById("password")
+    .value;
+
+
+    const error =
+    document
+    .getElementById("error");
+
+
+    const t =
+    translations[currentLanguage];
+
+
+    if(!name){
+
+        error.innerText =
+        t.nameError;
+
+        return;
+    }
+
+
+    if(password !== correctPassword){
+
+        error.innerText =
+        t.wrongPassword;
+
+        return;
+    }
+
+
+    userName =
+    name;
+
+
+    document
+    .getElementById("displayName")
+    .innerText =
+    userName;
+
+
+    document
+    .getElementById("menuName")
+    .innerText =
+    userName;
+
+
+    error.innerText = "";
+
+
+    showPage(
+        "welcomeUser"
+    );
+
+}
+
+
+
+/* ================= LOGO COLOR ================= */
+
+function changeLogoColor(page){
+
+    const logo =
+    document.getElementById("logo");
+
+
+    if(page === "home"){
+
+        logo.style.color =
+        "#2196ff";
+
+    }
+
+
+    else if(page === "login"){
+
+        logo.style.color =
+        "#ff315d";
+
+    }
+
+
+    else if(page === "welcomeUser"){
+
+        logo.style.color =
+        "#9c4dff";
+
+    }
+
+
+    else if(page === "menu"){
+
+        logo.style.color =
+        "#19c96b";
+
+    }
+
+
+    else if(page === "about"){
+
+        logo.style.color =
+        "#2196ff";
+
+    }
+
+}
+
+
+
+/* ================= LIGHT PARTICLES ================= */
+
+const particles =
+document.getElementById(
+    "particles"
+);
+
+
+for(
+    let i = 0;
+    i < 35;
+    i++
+){
+
+    const p =
+    document.createElement(
+        "div"
+    );
+
+
+    p.className =
+    "particle";
+
+
+    p.style.left =
+    Math.random()*100 +
+    "vw";
+
+
+    p.style.top =
+    Math.random()*100 +
+    "vh";
+
+
+    particles.appendChild(p);
+
+}
+
+
+</script>
+
+</body>
+  </html>
