@@ -1,0 +1,1614 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OMAR FXB</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,Helvetica,sans-serif;
+}
+
+html,body{
+    width:100%;
+    height:100%;
+    overflow:hidden;
+    background:#030303;
+    color:white;
+}
+
+body{
+    background:
+        radial-gradient(circle at 50% 30%,#151515 0%,#050505 45%,#000 100%);
+    transition:.2s;
+}
+
+/* =========================
+   PARTICLES
+========================= */
+
+.particles{
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    overflow:hidden;
+    z-index:0;
+}
+
+.particle{
+    position:absolute;
+    width:2px;
+    height:2px;
+    background:#fff;
+    border-radius:50%;
+    opacity:.5;
+    animation:float linear infinite;
+}
+
+@keyframes float{
+    from{
+        transform:translateY(110vh);
+        opacity:0;
+    }
+
+    20%{
+        opacity:.7;
+    }
+
+    80%{
+        opacity:.5;
+    }
+
+    to{
+        transform:translateY(-10vh);
+        opacity:0;
+    }
+}
+
+/* =========================
+   LOGO
+========================= */
+
+.logo{
+    position:fixed;
+    top:20px;
+    left:20px;
+    z-index:50;
+    font-size:20px;
+    font-weight:900;
+    letter-spacing:2px;
+    color:#fff;
+    text-shadow:0 0 12px #555;
+    transition:.4s;
+}
+
+/* =========================
+   LANGUAGE BUTTON
+========================= */
+
+.lang{
+    position:fixed;
+    top:18px;
+    right:18px;
+    z-index:50;
+
+    border:1px solid #444;
+    background:#090909;
+    color:white;
+
+    padding:8px 12px;
+    border-radius:8px;
+
+    cursor:pointer;
+    font-size:12px;
+
+    transition:.2s;
+}
+
+.lang:hover{
+    border-color:#777;
+    transform:scale(1.04);
+}
+
+/* =========================
+   PAGES
+========================= */
+
+.page{
+    position:absolute;
+    inset:0;
+
+    display:none;
+
+    justify-content:center;
+    align-items:center;
+
+    z-index:5;
+    padding:20px;
+}
+
+.page.active{
+    display:flex;
+}
+
+/* =========================
+   CARD
+========================= */
+
+.card{
+    width:min(430px,92vw);
+
+    padding:35px 25px;
+
+    border:1px solid #222;
+    border-radius:20px;
+
+    background:rgba(8,8,8,.88);
+
+    box-shadow:
+        0 0 40px rgba(255,255,255,.04),
+        inset 0 0 30px rgba(255,255,255,.02);
+
+    text-align:center;
+
+    backdrop-filter:blur(10px);
+}
+
+h1{
+    font-size:42px;
+    letter-spacing:4px;
+    margin-bottom:12px;
+}
+
+h2{
+    margin-bottom:12px;
+}
+
+p{
+    color:#aaa;
+    line-height:1.6;
+    font-size:14px;
+}
+
+/* =========================
+   INPUTS
+========================= */
+
+input{
+    width:100%;
+
+    margin-top:20px;
+
+    padding:14px;
+
+    border-radius:10px;
+    border:1px solid #333;
+
+    background:#050505;
+    color:#fff;
+
+    outline:none;
+
+    text-align:center;
+
+    transition:.2s;
+}
+
+input:focus{
+    border-color:#777;
+
+    box-shadow:
+        0 0 15px rgba(255,255,255,.08);
+}
+
+/* =========================
+   MAIN BUTTON
+========================= */
+
+button.mainBtn{
+    width:100%;
+
+    margin-top:16px;
+
+    padding:14px;
+
+    border:none;
+    border-radius:10px;
+
+    background:#fff;
+    color:#000;
+
+    font-weight:bold;
+
+    cursor:pointer;
+
+    transition:.2s;
+}
+
+button.mainBtn:hover{
+    transform:scale(1.02);
+
+    box-shadow:
+        0 0 20px rgba(255,255,255,.25);
+}
+
+button.mainBtn:active{
+    transform:scale(.97);
+}
+
+.small{
+    margin-top:15px;
+    color:#555;
+    font-size:11px;
+}
+
+/* =========================
+   HOME
+========================= */
+
+.homeTitle{
+    font-size:58px;
+    font-weight:900;
+    letter-spacing:6px;
+
+    text-shadow:
+        0 0 25px rgba(255,255,255,.12);
+}
+
+.homeLine{
+    margin-top:10px;
+    color:#777;
+    font-size:13px;
+}
+
+.homeHint{
+    margin-top:20px;
+    color:#444;
+    font-size:11px;
+}
+
+/* =========================
+   MENU
+========================= */
+
+.menuBtn{
+    width:100%;
+
+    padding:14px;
+    margin-top:10px;
+
+    background:#090909;
+    color:white;
+
+    border:1px solid #292929;
+    border-radius:10px;
+
+    cursor:pointer;
+
+    transition:.2s;
+}
+
+.menuBtn:hover{
+    background:#151515;
+    border-color:#555;
+}
+
+.menuBtn:active{
+    transform:scale(.98);
+}
+
+/* =========================
+   FINAL ERROR SCREEN
+========================= */
+
+#finalPage{
+    background:#000;
+    z-index:100;
+}
+
+.finalCard{
+    width:min(900px,94vw);
+
+    text-align:center;
+
+    position:relative;
+}
+
+/* BIG ERROR */
+
+.bigError{
+    font-size:clamp(55px,12vw,140px);
+
+    font-weight:1000;
+
+    color:#ff1515;
+
+    letter-spacing:5px;
+
+    text-shadow:
+        5px 0 #00ffff,
+        -5px 0 #ff00ff,
+        0 0 35px rgba(255,0,0,.6);
+
+    animation:glitchText .12s infinite;
+}
+
+/* MAIN MESSAGE */
+
+.systemMessage{
+    margin-top:20px;
+
+    font-size:clamp(20px,4vw,42px);
+
+    font-weight:bold;
+
+    color:white;
+
+    text-shadow:
+        0 0 10px rgba(255,255,255,.3);
+}
+
+/* PROGRESS NUMBER */
+
+.progressText{
+    margin-top:30px;
+
+    font-family:monospace;
+
+    font-size:20px;
+
+    color:#00ff66;
+
+    text-shadow:
+        0 0 10px #00ff66;
+}
+
+/* PROGRESS BOX */
+
+.progressBox{
+    width:min(650px,90vw);
+
+    height:16px;
+
+    margin:15px auto;
+
+    border:1px solid #333;
+
+    background:#080808;
+
+    overflow:hidden;
+}
+
+.progressBar{
+    height:100%;
+
+    width:0%;
+
+    background:#00ff44;
+
+    box-shadow:
+        0 0 20px #00ff44;
+
+    transition:.05s;
+}
+
+/* STATUS */
+
+.systemStatus{
+    margin-top:12px;
+
+    color:#777;
+
+    font-family:monospace;
+
+    font-size:13px;
+}
+
+/* ERRORS */
+
+.errors{
+    margin-top:25px;
+
+    font-family:monospace;
+
+    color:#ff2222;
+
+    font-size:clamp(15px,3vw,25px);
+
+    min-height:40px;
+
+    text-shadow:
+        0 0 10px rgba(255,0,0,.7);
+}
+
+/* =========================
+   GLITCH LAYER
+========================= */
+
+.glitchLayer{
+    position:fixed;
+
+    inset:0;
+
+    pointer-events:none;
+
+    opacity:0;
+
+    z-index:200;
+
+    background:
+        repeating-linear-gradient(
+            0deg,
+            transparent 0px,
+            transparent 3px,
+            rgba(255,0,0,.08) 4px
+        );
+}
+
+body.glitch .glitchLayer{
+    opacity:1;
+
+    animation:
+        screenGlitch .08s infinite;
+}
+
+body.shake{
+    animation:
+        shake .08s infinite;
+}
+
+body.flash{
+    animation:
+        redFlash .12s infinite;
+}
+
+/* =========================
+   ANIMATIONS
+========================= */
+
+@keyframes glitchText{
+
+    0%{
+        transform:translate(0);
+    }
+
+    25%{
+        transform:
+            translate(-4px,2px)
+            skewX(4deg);
+    }
+
+    50%{
+        transform:
+            translate(5px,-2px)
+            skewX(-5deg);
+    }
+
+    75%{
+        transform:
+            translate(-3px,1px);
+    }
+
+    100%{
+        transform:
+            translate(2px,-1px);
+    }
+}
+
+@keyframes screenGlitch{
+
+    0%{
+        transform:translate(0);
+    }
+
+    50%{
+        transform:translate(8px,-4px);
+    }
+
+    100%{
+        transform:translate(-8px,4px);
+    }
+}
+
+@keyframes shake{
+
+    0%{
+        transform:translate(0);
+    }
+
+    25%{
+        transform:translate(8px,-5px);
+    }
+
+    50%{
+        transform:translate(-7px,6px);
+    }
+
+    75%{
+        transform:translate(5px,3px);
+    }
+
+    100%{
+        transform:translate(-5px,-4px);
+    }
+}
+
+@keyframes redFlash{
+
+    0%{
+        filter:none;
+    }
+
+    50%{
+        filter:
+            brightness(1.8)
+            saturate(2);
+    }
+
+    100%{
+        filter:none;
+    }
+}
+
+.hidden{
+    display:none!important;
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media(max-width:500px){
+
+    .homeTitle{
+        font-size:42px;
+        letter-spacing:4px;
+    }
+
+    .logo{
+        font-size:17px;
+    }
+
+    .bigError{
+        font-size:clamp(45px,14vw,90px);
+    }
+
+    .systemMessage{
+        font-size:22px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- =========================
+     PARTICLES
+========================= -->
+
+<div class="particles" id="particles"></div>
+
+
+<!-- =========================
+     LOGO
+========================= -->
+
+<div class="logo" id="logo">
+    OMAR FXB
+</div>
+
+
+<!-- =========================
+     LANGUAGE
+========================= -->
+
+<button
+    class="lang"
+    onclick="toggleLanguage()"
+    id="langBtn"
+>
+    فارسی
+</button>
+
+
+<!-- =========================
+     HOME
+========================= -->
+
+<section
+    class="page active"
+    id="home"
+>
+
+    <div class="card">
+
+        <div class="homeTitle">
+            OMAR FXB
+        </div>
+
+        <div
+            class="homeLine"
+            id="homeLine"
+        >
+            Welcome to my little world.
+        </div>
+
+        <div
+            class="homeHint"
+            id="homeHint"
+        >
+            Something is waiting behind the next step...
+        </div>
+
+        <button
+            class="mainBtn"
+            onclick="showPage('login')"
+            id="startBtn"
+        >
+            ENTER
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     LOGIN
+========================= -->
+
+<section
+    class="page"
+    id="login"
+>
+
+    <div class="card">
+
+        <h2 id="loginTitle">
+            ACCESS
+        </h2>
+
+        <p id="loginText">
+            Enter your name and password.
+        </p>
+
+        <input
+            type="text"
+            id="nameInput"
+            placeholder="Your name"
+        >
+
+        <input
+            type="password"
+            id="passwordInput"
+            placeholder="Password"
+        >
+
+        <button
+            class="mainBtn"
+            onclick="login()"
+            id="loginBtn"
+        >
+            CONTINUE
+        </button>
+
+        <div
+            class="small"
+            id="loginHint"
+        >
+            Hint: fx486$
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     WELCOME
+========================= -->
+
+<section
+    class="page"
+    id="welcomeUser"
+>
+
+    <div class="card">
+
+        <h2 id="welcomeTitle">
+            Welcome
+        </h2>
+
+        <p id="welcomeText"></p>
+
+        <button
+            class="mainBtn"
+            onclick="showPage('menu')"
+            id="welcomeBtn"
+        >
+            CONTINUE
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     MENU
+========================= -->
+
+<section
+    class="page"
+    id="menu"
+>
+
+    <div class="card">
+
+        <h2>
+            OMAR FXB
+        </h2>
+
+        <p id="menuText">
+            Choose your next step.
+        </p>
+
+        <button
+            class="menuBtn"
+            onclick="startFinal()"
+            id="menuFinal"
+        >
+            ✦ CONTINUE
+        </button>
+
+        <button
+            class="menuBtn"
+            onclick="showPage('home')"
+            id="menuBack"
+        >
+            ← BACK
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     FINAL PRANK
+========================= -->
+
+<section
+    class="page"
+    id="finalPage"
+>
+
+    <div class="finalCard">
+
+        <div
+            class="bigError"
+            id="bigError"
+        >
+            SYSTEM ERROR
+        </div>
+
+        <div
+            class="systemMessage"
+            id="systemMessage"
+        >
+            Thank you for cooperating.
+        </div>
+
+        <div
+            class="progressText"
+            id="progressText"
+        >
+            0.100%
+        </div>
+
+        <div class="progressBox">
+
+            <div
+                class="progressBar"
+                id="progressBar"
+            ></div>
+
+        </div>
+
+        <div
+            class="systemStatus"
+            id="systemStatus"
+        >
+            Initializing...
+        </div>
+
+        <div
+            class="errors"
+            id="errors"
+        ></div>
+
+    </div>
+
+</section>
+
+
+<!-- GLITCH OVERLAY -->
+
+<div class="glitchLayer"></div>
+
+
+<script>
+
+/* =========================
+   PARTICLES
+========================= */
+
+const particleBox =
+    document.getElementById("particles");
+
+for(let i = 0; i < 45; i++){
+
+    const p =
+        document.createElement("div");
+
+    p.className = "particle";
+
+    p.style.left =
+        Math.random() * 100 + "%";
+
+    p.style.animationDuration =
+        (5 + Math.random() * 10) + "s";
+
+    p.style.animationDelay =
+        Math.random() * 8 + "s";
+
+    particleBox.appendChild(p);
+}
+
+
+/* =========================
+   GLOBAL VARIABLES
+========================= */
+
+let language = "en";
+
+let userName = "";
+
+
+/* =========================
+   TRANSLATIONS
+========================= */
+
+const translations = {
+
+    en:{
+
+        homeLine:
+            "Welcome to my little world.",
+
+        homeHint:
+            "Something is waiting behind the next step...",
+
+        start:
+            "ENTER",
+
+        loginTitle:
+            "ACCESS",
+
+        loginText:
+            "Enter your name and password.",
+
+        namePlaceholder:
+            "Your name",
+
+        passwordPlaceholder:
+            "Password",
+
+        loginBtn:
+            "CONTINUE",
+
+        loginHint:
+            "Hint: fx486$",
+
+        welcome:
+            "Welcome",
+
+        welcomeBtn:
+            "CONTINUE",
+
+        welcomeText:
+            "You're inside OMAR FXB.",
+
+        menuText:
+            "Choose your next step.",
+
+        menuFinal:
+            "✦ CONTINUE",
+
+        menuBack:
+            "← BACK",
+
+        thank:
+            "Thank you for cooperating.",
+
+        sending:
+            "Your information is being sent to OMAR FXB...",
+
+        initializing:
+            "Initializing secure process...",
+
+        scanning:
+            "Scanning system...",
+
+        processing:
+            "Processing...",
+
+        uploading:
+            "Uploading...",
+
+        finalizing:
+            "Finalizing...",
+
+        failed:
+            "PROCESS FAILED",
+
+        terminated:
+            "SESSION TERMINATED",
+
+        shutdown:
+            "SYSTEM SHUTDOWN",
+
+        errors:[
+            "ERROR 503",
+            "CONNECTION LOST",
+            "DATA CORRUPTED",
+            "SYSTEM FAILURE",
+            "MEMORY ERROR",
+            "CRITICAL ERROR",
+            "SESSION TERMINATED"
+        ],
+
+        finalTitle:
+            "SYSTEM ERROR"
+    },
+
+
+    fa:{
+
+        homeLine:
+            "به دنیای کوچک من خوش آمدی.",
+
+        homeHint:
+            "یک چیز عجیب پشت مرحله بعد منتظرته...",
+
+        start:
+            "ورود",
+
+        loginTitle:
+            "ورود",
+
+        loginText:
+            "نام و رمز عبور را وارد کن.",
+
+        namePlaceholder:
+            "نام شما",
+
+        passwordPlaceholder:
+            "رمز عبور",
+
+        loginBtn:
+            "ادامه",
+
+        loginHint:
+            "راهنما: fx486$",
+
+        welcome:
+            "خوش آمدی",
+
+        welcomeBtn:
+            "ادامه",
+
+        welcomeText:
+            "تو وارد OMAR FXB شدی.",
+
+        menuText:
+            "مرحله بعد را انتخاب کن.",
+
+        menuFinal:
+            "✦ ادامه",
+
+        menuBack:
+            "← برگشت",
+
+        thank:
+            "ممنون که همکاری کردی.",
+
+        sending:
+            "اطلاعات شما در حال ارسال به OMAR FXB است...",
+
+        initializing:
+            "در حال شروع فرآیند...",
+
+        scanning:
+            "در حال بررسی سیستم...",
+
+        processing:
+            "در حال پردازش...",
+
+        uploading:
+            "در حال انتقال...",
+
+        finalizing:
+            "در حال نهایی‌سازی...",
+
+        failed:
+            "فرآیند با خطا مواجه شد",
+
+        terminated:
+            "نشست خاتمه یافت",
+
+        shutdown:
+            "خاموشی سیستم",
+
+        errors:[
+            "خطای ۵۰۳",
+            "ارتباط قطع شد",
+            "اطلاعات خراب شد",
+            "خرابی سیستم",
+            "خطای حافظه",
+            "خطای بحرانی",
+            "نشست خاتمه یافت"
+        ],
+
+        finalTitle:
+            "خطای سیستم"
+    }
+
+};
+
+
+/* =========================
+   PAGE CONTROL
+========================= */
+
+function showPage(id){
+
+    document
+        .querySelectorAll(".page")
+        .forEach(page => {
+
+            page.classList.remove("active");
+
+        });
+
+
+    document
+        .getElementById(id)
+        .classList.add("active");
+
+
+    updateLogo(id);
+}
+
+
+/* =========================
+   LOGO COLORS
+========================= */
+
+function updateLogo(page){
+
+    const logo =
+        document.getElementById("logo");
+
+
+    if(page === "finalPage"){
+
+        logo.style.color = "#ff1111";
+
+        logo.style.textShadow =
+            "0 0 15px red";
+
+    }
+
+    else if(page === "login"){
+
+        logo.style.color = "#00aaff";
+
+        logo.style.textShadow =
+            "0 0 15px #0088ff";
+
+    }
+
+    else if(page === "welcomeUser"){
+
+        logo.style.color = "#9b59ff";
+
+        logo.style.textShadow =
+            "0 0 15px #9b59ff";
+
+    }
+
+    else{
+
+        logo.style.color = "#fff";
+
+        logo.style.textShadow =
+            "0 0 12px #555";
+
+    }
+}
+
+
+/* =========================
+   LOGIN
+========================= */
+
+function login(){
+
+    const name =
+        document
+        .getElementById("nameInput")
+        .value
+        .trim();
+
+
+    const password =
+        document
+        .getElementById("passwordInput")
+        .value;
+
+
+    if(!name){
+
+        alert(
+            language === "en"
+            ? "Enter your name."
+            : "نامت را وارد کن."
+        );
+
+        return;
+    }
+
+
+    if(password !== "fx486$"){
+
+        alert(
+            language === "en"
+            ? "Wrong password."
+            : "رمز عبور اشتباه است."
+        );
+
+        return;
+    }
+
+
+    userName = name;
+
+
+    document
+        .getElementById("welcomeTitle")
+        .textContent =
+        translations[language].welcome
+        + ", "
+        + userName
+        + " 👋";
+
+
+    document
+        .getElementById("welcomeText")
+        .textContent =
+        translations[language].welcomeText;
+
+
+    showPage("welcomeUser");
+}
+
+
+/* =========================
+   LANGUAGE
+========================= */
+
+function toggleLanguage(){
+
+    language =
+        language === "en"
+        ? "fa"
+        : "en";
+
+
+    applyLanguage();
+}
+
+
+/* =========================
+   APPLY LANGUAGE
+========================= */
+
+function applyLanguage(){
+
+    const t =
+        translations[language];
+
+
+    document
+        .getElementById("homeLine")
+        .textContent =
+        t.homeLine;
+
+
+    document
+        .getElementById("homeHint")
+        .textContent =
+        t.homeHint;
+
+
+    document
+        .getElementById("startBtn")
+        .textContent =
+        t.start;
+
+
+    document
+        .getElementById("loginTitle")
+        .textContent =
+        t.loginTitle;
+
+
+    document
+        .getElementById("loginText")
+        .textContent =
+        t.loginText;
+
+
+    document
+        .getElementById("nameInput")
+        .placeholder =
+        t.namePlaceholder;
+
+
+    document
+        .getElementById("passwordInput")
+        .placeholder =
+        t.passwordPlaceholder;
+
+
+    document
+        .getElementById("loginBtn")
+        .textContent =
+        t.loginBtn;
+
+
+    document
+        .getElementById("loginHint")
+        .textContent =
+        t.loginHint;
+
+
+    document
+        .getElementById("welcomeBtn")
+        .textContent =
+        t.welcomeBtn;
+
+
+    document
+        .getElementById("welcomeText")
+        .textContent =
+        t.welcomeText;
+
+
+    document
+        .getElementById("menuText")
+        .textContent =
+        t.menuText;
+
+
+    document
+        .getElementById("menuFinal")
+        .textContent =
+        t.menuFinal;
+
+
+    document
+        .getElementById("menuBack")
+        .textContent =
+        t.menuBack;
+
+
+    document
+        .getElementById("langBtn")
+        .textContent =
+        language === "en"
+        ? "فارسی"
+        : "English";
+
+
+    document.body.dir =
+        language === "fa"
+        ? "rtl"
+        : "ltr";
+
+
+    if(userName){
+
+        document
+            .getElementById("welcomeTitle")
+            .textContent =
+            t.welcome
+            + ", "
+            + userName
+            + " 👋";
+    }
+}
+
+
+/* =========================
+   START FINAL
+========================= */
+
+function startFinal(){
+
+    showPage("finalPage");
+
+
+    document.body
+        .classList
+        .add("glitch");
+
+
+    const t =
+        translations[language];
+
+
+    document
+        .getElementById("bigError")
+        .textContent =
+        t.finalTitle;
+
+
+    document
+        .getElementById("systemMessage")
+        .textContent =
+        t.thank;
+
+
+    document
+        .getElementById("systemStatus")
+        .textContent =
+        t.initializing;
+
+
+    runFakeProcess();
+}
+
+
+/* =========================
+   FAKE PROGRESS
+========================= */
+
+function runFakeProcess(){
+
+    const bar =
+        document.getElementById("progressBar");
+
+
+    const text =
+        document.getElementById("progressText");
+
+
+    const status =
+        document.getElementById("systemStatus");
+
+
+    const errors =
+        document.getElementById("errors");
+
+
+    const message =
+        document.getElementById("systemMessage");
+
+
+    const t =
+        translations[language];
+
+
+    let progress = 0.100;
+
+
+    bar.style.width = "0%";
+
+
+    text.textContent =
+        progress.toFixed(3) + "%";
+
+
+    errors.textContent = "";
+
+
+    message.textContent =
+        t.thank;
+
+
+    document.body
+        .classList
+        .remove("shake");
+
+
+    document.body
+        .classList
+        .remove("flash");
+
+
+    const interval =
+        setInterval(() => {
+
+
+            progress +=
+                Math.random() * 2.5 + 0.5;
+
+
+            if(progress >= 100){
+
+                progress = 100;
+
+                clearInterval(interval);
+
+                finishPrank();
+            }
+
+
+            text.textContent =
+                progress.toFixed(3) + "%";
+
+
+            bar.style.width =
+                progress + "%";
+
+
+            if(progress < 30){
+
+                status.textContent =
+                    t.scanning;
+
+            }
+
+            else if(progress < 60){
+
+                status.textContent =
+                    t.processing;
+
+            }
+
+            else if(progress < 85){
+
+                status.textContent =
+                    t.uploading;
+
+            }
+
+            else{
+
+                status.textContent =
+                    t.finalizing;
+
+            }
+
+        },80);
+}
+
+
+/* =========================
+   FINAL ERROR SEQUENCE
+========================= */
+
+function finishPrank(){
+
+    const t =
+        translations[language];
+
+
+    const message =
+        document
+        .getElementById("systemMessage");
+
+
+    const status =
+        document
+        .getElementById("systemStatus");
+
+
+    const errors =
+        document
+        .getElementById("errors");
+
+
+    message.textContent =
+        t.sending;
+
+
+    status.textContent =
+        t.failed;
+
+
+    document.body
+        .classList
+        .add("shake");
+
+
+    document.body
+        .classList
+        .add("flash");
+
+
+    let i = 0;
+
+
+    const errorTimer =
+        setInterval(() => {
+
+
+            if(i >= t.errors.length){
+
+                clearInterval(errorTimer);
+
+
+                setTimeout(() => {
+
+
+                    document.body
+                        .classList
+                        .remove("shake");
+
+
+                    document.body
+                        .classList
+                        .remove("flash");
+
+
+                    status.textContent =
+                        t.terminated;
+
+
+                    errors.textContent =
+                        t.shutdown;
+
+
+                    /*
+                       PURE VISUAL PRANK
+                       NOTHING IS SENT.
+                       NOTHING IS STORED.
+                    */
+
+                    setTimeout(() => {
+
+                        window.location.replace(
+                            "about:blank"
+                        );
+
+                    },1800);
+
+
+                },1000);
+
+
+                return;
+            }
+
+
+            errors.textContent =
+                t.errors[i];
+
+
+            i++;
+
+
+        },650);
+}
+
+</script>
+
+</body>
+  </html>
