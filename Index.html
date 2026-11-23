@@ -1,0 +1,341 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OMAR FXB | Veronica</title>
+<style>
+*{box-sizing:border-box}
+body{
+ margin:0;background:#050817;color:white;
+ font-family:Georgia,serif;min-height:100vh;
+}
+button,input{font:inherit}
+button{cursor:pointer}
+.hidden{display:none!important}
+
+.page{
+ min-height:100vh;display:flex;align-items:center;
+ justify-content:center;padding:22px;text-align:center;
+}
+.login{
+ width:min(420px,100%);padding:40px 25px;
+ border:1px solid #38558c;border-radius:22px;
+ background:#071126;box-shadow:0 0 55px #244c9b44;
+}
+.brand{font:13px Arial;letter-spacing:6px;color:#8bbcff}
+h1{font-size:clamp(29px,7vw,39px);margin:27px 0 12px}
+p{color:#c4c5dd;line-height:1.8}
+input{
+ width:100%;padding:15px;margin:12px 0;
+ border-radius:10px;border:1px solid #344d7e;
+ background:#0b1832;color:white;outline:none;
+}
+.primary{
+ border:0;border-radius:30px;padding:14px 30px;
+ background:linear-gradient(100deg,#3977d8,#829eff);
+ color:white;font:bold 13px Arial;letter-spacing:2px;
+}
+.error{color:#ff929e;font:13px Arial;min-height:22px;margin-top:12px}
+
+/* QUESTION INTRO */
+#questionIntro{
+ background:radial-gradient(ellipse at center,#30234e,#090b20 65%,#03040b);
+}
+.questionBox{
+ width:min(500px,100%);padding:35px 22px;
+ border:1px solid #9d7acb55;border-radius:25px;
+ background:#17142caa;box-shadow:0 0 50px #bd76ff18;
+}
+.questionBox .symbol{font-size:58px;color:#f7a6d5}
+.questionBox h1{font-size:clamp(30px,7vw,43px)}
+.questionBox p{font-size:16px}
+
+/* YES OR NO */
+#choicePage{
+ background:
+ radial-gradient(ellipse at 50% 35%,#40204e,#110c27 55%,#050510);
+ overflow:hidden;
+}
+.choiceBox{
+ width:min(500px,100%);padding:30px 15px;
+}
+.choiceBox .symbol{font-size:65px}
+.choiceBox h1{font-size:clamp(28px,7vw,43px)}
+.choiceArea{
+ display:flex;align-items:center;justify-content:center;
+ gap:20px;flex-wrap:wrap;min-height:100px;
+}
+.yes,.no{
+ border:0;border-radius:30px;padding:14px 32px;
+ font:bold 15px Arial;min-width:110px;
+}
+.yes{background:linear-gradient(100deg,#ff579b,#b65aff);color:white}
+.no{background:#37344b;color:white;position:relative}
+#noHint{font:13px Arial;color:#bcb2d1}
+
+/* ROMANTIC WORLD */
+#world{
+ min-height:100vh;position:relative;overflow:hidden;
+ padding:30px 18px 60px;text-align:center;
+ background:
+ radial-gradient(ellipse at 50% 0%,#48285e,transparent 55%),
+ radial-gradient(ellipse at 15% 75%,#162b60,transparent 45%),
+ linear-gradient(160deg,#08091c,#11102b 55%,#050817);
+}
+#stars{
+ position:fixed;inset:0;pointer-events:none;
+ background-image:
+ radial-gradient(2px 2px at 20% 30%,white 50%,transparent),
+ radial-gradient(1px 1px at 70% 20%,white 50%,transparent),
+ radial-gradient(2px 2px at 85% 65%,#b8caff 50%,transparent),
+ radial-gradient(1px 1px at 40% 80%,white 50%,transparent);
+ background-size:180px 180px;
+ opacity:.7;animation:twinkle 5s infinite alternate;
+}
+@keyframes twinkle{to{opacity:.25}}
+.topbrand{
+ position:relative;margin:5px 0 45px;
+ font:12px Arial;letter-spacing:6px;color:#d3b5ff;
+}
+.content{position:relative;z-index:2;max-width:650px;margin:auto}
+.glowheart{
+ font-size:70px;display:inline-block;
+ filter:drop-shadow(0 0 20px #ff6da9);
+ animation:pulse 2s infinite;
+}
+@keyframes pulse{50%{transform:scale(1.12)}}
+.subtitle{color:#d4c9e9;line-height:1.9}
+.panel{
+ margin:30px auto;padding:27px 20px;
+ border:1px solid #bd8bd755;border-radius:22px;
+ background:#17142caa;box-shadow:0 0 35px #a66cff18;
+}
+#nameLetters{
+ display:flex;justify-content:center;gap:8px;
+ flex-wrap:wrap;margin:30px 0;
+ font:bold clamp(23px,7vw,42px) Arial;
+}
+#nameLetters span{
+ opacity:.15;color:#ffb7dc;
+ text-shadow:0 0 20px #ff72ba;transition:.6s;
+}
+#nameLetters span.lit{opacity:1;transform:translateY(-7px)}
+.letter{text-align:left;line-height:2;color:#eee1f6;font-size:17px}
+.signature{color:#ffb3db;font-size:23px;margin-top:25px}
+footer{position:relative;margin-top:60px;color:#827c9d;font:10px Arial;letter-spacing:4px}
+.heartfloat{
+ position:fixed;bottom:-40px;z-index:1;
+ animation:floatUp 6s linear forwards;pointer-events:none;
+}
+@keyframes floatUp{to{transform:translateY(-110vh) rotate(25deg);opacity:0}}
+</style>
+</head>
+<body>
+
+<!-- LOGIN -->
+<section id="intro" class="page" style="background:radial-gradient(ellipse at top,#18366a,#080d20 60%,#02040b)">
+ <div class="login">
+  <div class="brand">OMAR FXB</div>
+
+  <div id="welcome">
+   <h1>Hello, Welcome!</h1>
+   <p>A little surprise is waiting for you.</p>
+   <button class="primary" onclick="openName()">OPEN</button>
+  </div>
+
+  <div id="nameStep" class="hidden">
+   <h1>What's your name?</h1>
+   <p>Please enter your name to continue.</p>
+   <input id="visitor" placeholder="Your name">
+   <button class="primary" onclick="checkName()">CONTINUE</button>
+  </div>
+
+  <div id="codeStep" class="hidden">
+   <h1>One last thing...</h1>
+   <p>Enter the secret code.</p>
+   <input id="secret" type="password" placeholder="Secret code">
+   <button class="primary" onclick="checkCode()">UNLOCK</button>
+  </div>
+  <div class="error" id="error"></div>
+ </div>
+</section>
+
+<!-- ONE QUESTION INTRO -->
+<section id="questionIntro" class="page hidden">
+ <div class="questionBox">
+  <div class="brand">OMAR FXB</div>
+  <div class="symbol">♡</div>
+  <h1>I have a question for you...</h1>
+  <p>It's a little question, but your answer means a lot to me.</p>
+  <button class="primary" onclick="showChoice()">NEXT →</button>
+ </div>
+</section>
+
+<!-- YES OR NO ONLY -->
+<section id="choicePage" class="page hidden">
+ <div class="choiceBox">
+  <div class="symbol">💗</div>
+  <h1>Do you love me?</h1>
+  <div class="choiceArea">
+   <button class="yes" onclick="sayYes()">YES ❤️</button>
+   <button class="no" id="noBtn">NO 💔</button>
+  </div>
+  <p id="noHint">Choose your answer... 👀</p>
+ </div>
+</section>
+
+<!-- MAIN ROMANTIC WEBSITE -->
+<section id="world" class="hidden">
+ <div id="stars"></div>
+ <div class="topbrand">OMAR FXB PRESENTS</div>
+
+ <main class="content">
+  <div class="glowheart">♡</div>
+  <h1 id="hello">Hello, Veronica ♡</h1>
+  <p class="subtitle">
+   If I could give you one thing in this world,<br>
+   it would be the ability to see yourself through my eyes.
+   <br>Maybe then you'd understand how special you are.
+  </p>
+
+  <div class="panel" id="afterYes">
+   <div style="font-size:45px">✨ 💗 ✨</div>
+   <h1>I love you too!</h1>
+   <p class="subtitle">
+    More than words could ever explain.<br>
+    You just made this little world brighter.
+   </p>
+   <button class="primary" onclick="showLetters()">NEXT →</button>
+  </div>
+
+  <div id="letters" class="panel hidden">
+   <p class="subtitle">Eight letters. One beautiful name.</p>
+   <div id="nameLetters">
+    <span>V</span><span>E</span><span>R</span><span>O</span>
+    <span>N</span><span>I</span><span>C</span><span>A</span><span>♡</span>
+   </div>
+   <p class="subtitle">A name that has become a beautiful part of my story.</p>
+   <button class="primary" onclick="showLetter()">READ MY LETTER</button>
+  </div>
+
+  <div id="finalLetter" class="panel hidden">
+   <div class="glowheart">💗</div>
+   <h1>To My Special Veronica</h1>
+
+   <div class="letter">
+    My dearest Veronica,
+
+    <br><br>
+    Sometimes I wish words were enough to explain what someone means to me. But even a thousand words wouldn't be enough to describe how special you are.
+
+    <br><br>
+    You have a way of making ordinary moments feel beautiful. Your smile, your kindness, your little habits, and even the simplest conversations with you can make my day better.
+
+    <br><br>
+    I wish I could be there beside you sometimes, sharing a laugh, making memories, and enjoying the little moments that life gives us. Maybe one day the distance between us will become nothing more than a story we tell each other.
+
+    <br><br>
+    Until that day comes, I hope you never forget how precious you are. I hope you keep smiling, chasing your dreams, and being the wonderful person you are.
+
+    <br><br>
+    If I could choose one thing, it would be to make many more beautiful memories with you. I don't need perfect moments. I just want genuine ones, with you.
+
+    <br><br>
+    Thank you for being Veronica. Thank you for being part of my life. And thank you for making this little world feel a little more magical.
+
+    <br><br>
+    No matter how far away we are, I hope this page reminds you that you are appreciated, cared for, and truly special.
+
+   </div>
+
+   <div class="signature">
+    With all my love,<br>
+    Omar ♡
+   </div>
+  </div>
+ </main>
+ <footer>OMAR FXB · MADE WITH LOVE</footer>
+</section>
+
+<script>
+const SECRET_CODE="love8";
+
+function openName(){
+ document.getElementById("welcome").classList.add("hidden");
+ document.getElementById("nameStep").classList.remove("hidden");
+}
+function checkName(){
+ const name=document.getElementById("visitor").value.trim();
+ if(!name){
+  document.getElementById("error").textContent="Please enter your name.";
+  return;
+ }
+ document.getElementById("hello").textContent="Hello, "+name+" ♡";
+ document.getElementById("nameStep").classList.add("hidden");
+ document.getElementById("codeStep").classList.remove("hidden");
+ document.getElementById("error").textContent="";
+}
+function checkCode(){
+ const code=document.getElementById("secret").value.trim();
+ if(code!==SECRET_CODE){
+  document.getElementById("error").textContent="Incorrect code. Try again!";
+  return;
+ }
+ document.getElementById("intro").classList.add("hidden");
+ document.getElementById("questionIntro").classList.remove("hidden");
+}
+function showChoice(){
+ document.getElementById("questionIntro").classList.add("hidden");
+ document.getElementById("choicePage").classList.remove("hidden");
+}
+function sayYes(){
+ document.getElementById("choicePage").classList.add("hidden");
+ document.getElementById("world").classList.remove("hidden");
+ floatHearts();
+}
+function showLetters(){
+ document.getElementById("afterYes").classList.add("hidden");
+ document.getElementById("letters").classList.remove("hidden");
+ document.querySelectorAll("#nameLetters span").forEach((letter,i)=>{
+  setTimeout(()=>letter.classList.add("lit"),i*450);
+ });
+}
+function showLetter(){
+ document.getElementById("letters").classList.add("hidden");
+ document.getElementById("finalLetter").classList.remove("hidden");
+}
+const noBtn=document.getElementById("noBtn");
+noBtn.addEventListener("pointerenter",()=>{
+ const x=(Math.random()-.5)*180;
+ const y=(Math.random()-.5)*100;
+ noBtn.style.transform=`translate(${x}px,${y}px)`;
+});
+noBtn.addEventListener("click",()=>{
+ document.getElementById("noHint").textContent="Haha, you caught me! 😄 It's okay, your answer is yours.";
+});
+function floatHearts(){
+ const symbols=["♡","♥","✨","💗"];
+ for(let i=0;i<24;i++){
+  setTimeout(()=>{
+   const h=document.createElement("div");
+   h.className="heartfloat";
+   h.textContent=symbols[Math.floor(Math.random()*symbols.length)];
+   h.style.left=Math.random()*100+"vw";
+   h.style.fontSize=(15+Math.random()*25)+"px";
+   h.style.color="#ff9bd1";
+   document.body.appendChild(h);
+   setTimeout(()=>h.remove(),6500);
+  },i*180);
+ }
+}
+document.getElementById("visitor").addEventListener("keydown",e=>{
+ if(e.key==="Enter")checkName();
+});
+document.getElementById("secret").addEventListener("keydown",e=>{
+ if(e.key==="Enter")checkCode();
+});
+</script>
+</body>
+</html>
