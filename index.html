@@ -1,0 +1,709 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OMAR FXB | The Universe of Vero</title>
+
+<style>
+*{box-sizing:border-box}
+body{
+ margin:0;
+ background:#050510;
+ color:white;
+ font-family:Georgia,serif;
+ overflow-x:hidden;
+}
+button,input{font:inherit}
+button{cursor:pointer}
+.hidden{display:none!important}
+
+.page{
+ min-height:100vh;
+ display:flex;
+ justify-content:center;
+ align-items:center;
+ text-align:center;
+ padding:22px;
+}
+.brand{
+ font:12px Arial;
+ letter-spacing:6px;
+ color:#c4a7ff;
+}
+.primary{
+ border:1px solid #bca0ff;
+ border-radius:30px;
+ padding:14px 32px;
+ background:linear-gradient(110deg,#7446a8,#c15b9c);
+ color:white;
+ font:bold 13px Arial;
+ letter-spacing:2px;
+ box-shadow:0 0 25px #b65cff44;
+ transition:.3s;
+}
+.primary:hover{transform:scale(1.05);box-shadow:0 0 35px #d18cff88}
+input{
+ width:100%;
+ padding:15px;
+ margin:12px 0;
+ border-radius:10px;
+ border:1px solid #55477d;
+ background:#100f24;
+ color:white;
+ outline:none;
+}
+.error{
+ color:#ff9cbb;
+ font:13px Arial;
+ min-height:22px;
+ margin-top:12px;
+}
+
+/* LOGIN */
+#intro{
+ background:radial-gradient(ellipse at top,#18366a,#080d20 60%,#02040b);
+}
+.login{
+ width:min(420px,100%);
+ padding:40px 25px;
+ border:1px solid #38558c;
+ border-radius:22px;
+ background:#071126;
+ box-shadow:0 0 55px #244c9b44;
+}
+.login h1{font-size:34px;margin:28px 0 12px}
+.login p{color:#b8c5e0;line-height:1.8}
+
+/* QUESTION INTRO */
+#questionIntro{
+ background:radial-gradient(ellipse at center,#30234e,#090b20 65%,#03040b);
+}
+.questionBox{
+ width:min(500px,100%);
+ padding:35px 22px;
+ border:1px solid #9d7acb55;
+ border-radius:25px;
+ background:#17142caa;
+ box-shadow:0 0 50px #bd76ff18;
+}
+.questionBox .symbol{font-size:65px}
+.questionBox h1{font-size:clamp(30px,7vw,43px)}
+.questionBox p{color:#d4c9e9;line-height:1.8}
+
+/* YES NO */
+#choicePage{
+ background:radial-gradient(ellipse at center,#48204f,#110c27 60%,#050510);
+}
+.choiceBox{width:min(500px,100%)}
+.choiceBox h1{font-size:clamp(30px,7vw,44px)}
+.choiceArea{
+ display:flex;
+ justify-content:center;
+ align-items:center;
+ flex-wrap:wrap;
+ gap:20px;
+ min-height:100px;
+}
+.yes,.no{
+ border:0;
+ border-radius:30px;
+ padding:14px 32px;
+ min-width:110px;
+ font:bold 15px Arial;
+}
+.yes{background:linear-gradient(100deg,#ff579b,#b65aff);color:white}
+.no{background:#37344b;color:white;position:relative}
+#noHint{color:#bcb2d1;font:13px Arial}
+
+/* SPACE WORLD */
+#universe{
+ min-height:100vh;
+ position:relative;
+ overflow:hidden;
+ padding:30px 15px 60px;
+ text-align:center;
+ background:
+ radial-gradient(ellipse at 50% 40%,#20163f 0%,transparent 55%),
+ radial-gradient(ellipse at 15% 80%,#15244d,transparent 45%),
+ linear-gradient(160deg,#03040e,#0c0920 60%,#03040d);
+}
+#spaceStars{
+ position:absolute;
+ inset:0;
+ pointer-events:none;
+ background-image:
+ radial-gradient(2px 2px at 15% 20%,#fff 50%,transparent),
+ radial-gradient(1px 1px at 75% 30%,#fff 50%,transparent),
+ radial-gradient(2px 2px at 85% 70%,#d8caff 50%,transparent),
+ radial-gradient(1px 1px at 40% 80%,#fff 50%,transparent),
+ radial-gradient(2px 2px at 55% 15%,#fff 50%,transparent);
+ background-size:190px 190px;
+ opacity:.6;
+ animation:twinkle 5s infinite alternate;
+}
+@keyframes twinkle{to{opacity:.2}}
+.universeHeader{
+ position:relative;
+ z-index:2;
+ padding-top:15px;
+}
+.universeHeader h1{
+ font-size:clamp(25px,6vw,38px);
+ color:#e5d5ff;
+}
+.universeHeader p{
+ color:#bdb2d8;
+ font:13px Arial;
+ letter-spacing:1px;
+}
+.progress{
+ margin:18px auto 0;
+ width:min(240px,80%);
+ height:5px;
+ background:#ffffff18;
+ border-radius:10px;
+ overflow:hidden;
+}
+#progressBar{
+ width:0%;
+ height:100%;
+ background:linear-gradient(90deg,#a66cff,#ff8dce);
+ transition:width .5s;
+}
+.spaceStage{
+ position:relative;
+ width:min(650px,100%);
+ height:490px;
+ margin:10px auto 0;
+ z-index:2;
+}
+.lockHeart{
+ position:absolute;
+ left:50%;
+ top:50%;
+ transform:translate(-50%,-50%);
+ width:150px;
+ height:150px;
+ display:flex;
+ justify-content:center;
+ align-items:center;
+ flex-direction:column;
+ border-radius:50%;
+ border:1px solid #c7a0ff55;
+ background:radial-gradient(circle,#3b225b,#120e2b 70%);
+ box-shadow:0 0 45px #9c58e555,inset 0 0 25px #a45eff22;
+ transition:.7s;
+}
+.lockHeart .heartIcon{
+ font-size:75px;
+ filter:drop-shadow(0 0 15px #f28bcf);
+}
+.lockHeart .lockText{
+ font:11px Arial;
+ letter-spacing:2px;
+ color:#d6c1ff;
+}
+.lockHeart.unlocked{
+ cursor:pointer;
+ border-color:#ffc2e9;
+ box-shadow:0 0 70px #ff7acb99;
+ animation:heartGlow 1.5s infinite alternate;
+}
+@keyframes heartGlow{
+ to{transform:translate(-50%,-50%) scale(1.08);box-shadow:0 0 90px #ff7acb}
+}
+.star{
+ position:absolute;
+ width:67px;
+ height:67px;
+ border:1px solid #e2d3ff77;
+ border-radius:50%;
+ background:radial-gradient(circle,#46326e,#17152d 75%);
+ color:#fff0c7;
+ font-size:28px;
+ box-shadow:0 0 25px #a889ff55;
+ animation:float 4s ease-in-out infinite;
+ transition:.3s;
+}
+.star:hover{box-shadow:0 0 35px #d6a2ff;transform:scale(1.12)}
+.star.done{
+ background:radial-gradient(circle,#8a4c87,#34204d);
+ color:#ffd6ee;
+ border-color:#ffc5e8;
+}
+.star:nth-child(1){left:9%;top:13%;animation-delay:0s}
+.star:nth-child(2){right:9%;top:15%;animation-delay:.7s}
+.star:nth-child(3){left:2%;bottom:17%;animation-delay:1.3s}
+.star:nth-child(4){right:2%;bottom:17%;animation-delay:2s}
+.star:nth-child(5){left:50%;top:2%;transform:translateX(-50%);animation-delay:1s}
+@keyframes float{
+ 0%,100%{margin-top:0}
+ 50%{margin-top:-18px}
+}
+.star:nth-child(5){animation-name:floatCenter}
+@keyframes floatCenter{
+ 0%,100%{transform:translateX(-50%) translateY(0)}
+ 50%{transform:translateX(-50%) translateY(-18px)}
+}
+.instruction{
+ position:relative;
+ z-index:2;
+ color:#c9b9e7;
+ font-size:14px;
+ line-height:1.8;
+ padding:0 10px;
+}
+
+/* STAR MESSAGE */
+#starMessage{
+ position:fixed;
+ inset:0;
+ z-index:20;
+ background:#050510ed;
+ display:flex;
+ justify-content:center;
+ align-items:center;
+ padding:20px;
+}
+.messageCard{
+ width:min(420px,100%);
+ padding:35px 24px;
+ border:1px solid #b58de477;
+ border-radius:25px;
+ background:linear-gradient(145deg,#24183c,#100f25);
+ box-shadow:0 0 50px #b16aff33;
+}
+.messageCard .starBig{font-size:55px}
+.messageCard h2{color:#f3d8ff}
+.messageCard p{color:#e0d5ed;line-height:1.9;font-size:17px}
+
+/* LOVE LETTER */
+#loveLetter{
+ min-height:100vh;
+ padding:40px 18px 60px;
+ background:
+ radial-gradient(ellipse at top,#3d1b4c,#100d25 50%,#050510);
+ text-align:center;
+}
+.letterCard{
+ max-width:680px;
+ margin:25px auto;
+ padding:30px 23px;
+ border:1px solid #d39bce66;
+ border-radius:22px;
+ background:#1c142acc;
+ box-shadow:0 0 45px #ff8dc522;
+}
+.letterCard h1{
+ font-size:clamp(29px,7vw,43px);
+ color:#ffd2eb;
+}
+.letterText{
+ text-align:left;
+ line-height:1.9;
+ color:#f0e2ef;
+ font-size:16px;
+}
+.signature{
+ color:#ffb8dc;
+ font-size:23px;
+ margin-top:30px;
+}
+
+/* FINAL */
+#ending{
+ min-height:100vh;
+ background:#000;
+ display:flex;
+ justify-content:center;
+ align-items:center;
+ text-align:center;
+ padding:20px;
+}
+#endingContent{
+ max-width:650px;
+}
+#endingWords{
+ font-size:clamp(30px,8vw,58px);
+ letter-spacing:3px;
+ color:#ffd4ef;
+ text-shadow:0 0 25px #ff70c5;
+ line-height:1.7;
+}
+.endLine{
+ opacity:0;
+ display:inline-block;
+ animation:letterIn .8s forwards;
+}
+@keyframes letterIn{
+ from{opacity:0;transform:translateY(20px);filter:blur(8px)}
+ to{opacity:1;transform:translateY(0);filter:blur(0)}
+}
+.endSmall{
+ color:#a69ab9;
+ letter-spacing:4px;
+ font:11px Arial;
+ margin-top:30px;
+ opacity:0;
+ animation:letterIn 2s forwards;
+ animation-delay:5s;
+}
+.heartRain{
+ position:fixed;
+ bottom:-40px;
+ z-index:30;
+ pointer-events:none;
+ animation:rise 6s linear forwards;
+}
+@keyframes rise{
+ to{transform:translateY(-110vh) rotate(30deg);opacity:0}
+}
+</style>
+</head>
+
+<body>
+
+<!-- WELCOME -->
+<section id="intro" class="page">
+ <div class="login">
+  <div class="brand">OMAR FXB</div>
+
+  <div id="welcome">
+   <h1>Hello, Welcome!</h1>
+   <p>A little surprise is waiting for you.</p>
+   <button class="primary" onclick="openName()">OPEN</button>
+  </div>
+
+  <div id="nameStep" class="hidden">
+   <h1>What's your name?</h1>
+   <p>Please enter your name to continue.</p>
+   <input id="visitor" placeholder="Your name">
+   <button class="primary" onclick="checkName()">CONTINUE</button>
+  </div>
+
+  <div id="codeStep" class="hidden">
+   <h1>One last thing...</h1>
+   <p>Enter the secret code.</p>
+   <input id="secret" type="password" placeholder="Secret code">
+   <button class="primary" onclick="checkCode()">UNLOCK</button>
+  </div>
+
+  <div class="error" id="error"></div>
+ </div>
+</section>
+
+<!-- QUESTION INTRO -->
+<section id="questionIntro" class="page hidden">
+ <div class="questionBox">
+  <div class="brand">OMAR FXB</div>
+  <div class="symbol">♡</div>
+  <h1>I have a question for you...</h1>
+  <p>It's a little question, but your answer means a lot to me.</p>
+  <button class="primary" onclick="showChoice()">NEXT →</button>
+ </div>
+</section>
+
+<!-- YES OR NO -->
+<section id="choicePage" class="page hidden">
+ <div class="choiceBox">
+  <div style="font-size:65px">💗</div>
+  <h1>Do you love me?</h1>
+  <div class="choiceArea">
+   <button class="yes" onclick="sayYes()">YES ❤️</button>
+   <button class="no" id="noBtn">NO 💔</button>
+  </div>
+  <p id="noHint">Choose your answer... 👀</p>
+</div>
+</section>
+
+<!-- UNIVERSE AND FIVE STARS -->
+<section id="universe" class="hidden">
+ <div id="spaceStars"></div>
+
+ <div class="universeHeader">
+  <div class="brand">OMAR FXB · SECRET UNIVERSE</div>
+  <h1>The Universe of Vero</h1>
+  <p>FIVE STARS. FIVE LITTLE SECRETS.</p>
+
+  <div class="progress">
+   <div id="progressBar"></div>
+  </div>
+  <p id="progressText">0 / 5 STARS DISCOVERED</p>
+ </div>
+
+ <div class="spaceStage">
+  <button class="star" onclick="openStar(0)">✦</button>
+  <button class="star" onclick="openStar(1)">✧</button>
+  <button class="star" onclick="openStar(2)">✦</button>
+  <button class="star" onclick="openStar(3)">✧</button>
+  <button class="star" onclick="openStar(4)">✦</button>
+
+  <div class="lockHeart" id="lockHeart" onclick="openHeart()">
+   <div class="heartIcon" id="heartIcon">💗</div>
+   <div class="lockText" id="lockText">🔒 LOCKED</div>
+  </div>
+ </div>
+
+ <p class="instruction" id="instruction">
+  Unlock all five stars to open the heart.<br>
+  Every star is hiding a little surprise for you. ✨
+ </p>
+</section>
+
+<!-- STAR MESSAGE POPUP -->
+<div id="starMessage" class="hidden">
+ <div class="messageCard">
+  <div class="starBig">✨</div>
+  <h2 id="messageTitle">A little secret</h2>
+  <p id="messageText"></p>
+  <button class="primary" onclick="closeStar()">BACK TO THE STARS</button>
+ </div>
+</div>
+
+<!-- LOVE LETTER -->
+<section id="loveLetter" class="hidden">
+ <div class="brand">OMAR FXB · FROM MY HEART</div>
+ <div class="letterCard">
+  <div style="font-size:65px">💗</div>
+  <h1>My Dearest Veronica</h1>
+
+  <div class="letterText">
+   <p>My dearest Veronica,</p>
+
+   <p>1. I wish I could find the perfect words to describe what you mean to me.</p>
+   <p>2. Sometimes I think even a thousand pages would not be enough.</p>
+   <p>3. You are one of the sweetest parts of my story.</p>
+   <p>4. Your name brings a special feeling to my heart.</p>
+   <p>5. And your smile is one of my favourite thoughts.</p>
+   <p>6. I may not always know how to express my feelings.</p>
+   <p>7. But that does not mean I feel any less.</p>
+   <p>8. I love the little things about you.</p>
+   <p>9. The way you talk.</p>
+   <p>10. The way you laugh.</p>
+   <p>11. The way you make ordinary conversations special.</p>
+   <p>12. Even the smallest moments with you can stay in my mind.</p>
+   <p>13. If I could, I would save every beautiful moment.</p>
+   <p>14. And put them in a little box called us.</p>
+   <p>15. I know distance is not always easy.</p>
+   <p>16. Sometimes I wish the miles between us were just a few steps.</p>
+   <p>17. I wish I could see you and say all of this in person.</p>
+   <p>18. I wish we could laugh together without looking at a screen.</p>
+   <p>19. I wish we could make memories that belong only to us.</p>
+   <p>20. Maybe one day, that wish will become a real memory.</p>
+   <p>21. Until then, I want you to know how much I appreciate you.</p>
+   <p>22. You do not have to be perfect.</p>
+   <p>23. You do not have to pretend to be someone else.</p>
+   <p>24. I like you for the person you are.</p>
+   <p>25. Your beautiful heart matters more than perfect words.</p>
+   <p>26. I hope you never doubt how special you are.</p>
+   <p>27. I hope you always find reasons to smile.</p>
+   <p>28. I hope your dreams become bigger than your fears.</p>
+   <p>29. And I hope life gives you countless beautiful moments.</p>
+   <p>30. If you ever have a difficult day, remember that tomorrow can be brighter.</p>
+   <p>31. You deserve kindness, happiness, and all the good things life can offer.</p>
+   <p>32. I want to celebrate your little victories.</p>
+   <p>33. I want to hear about your dreams.</p>
+   <p>34. I want to laugh with you about silly things.</p>
+   <p>35. I want to create memories we can smile about years later.</p>
+   <p>36. I do not need every day to be perfect.</p>
+   <p>37. I just hope we keep finding beautiful reasons to care.</p>
+   <p>38. You have become a lovely part of my thoughts.</p>
+   <p>39. And this little website is just one way to show it.</p>
+   <p>40. I made this universe because you deserve a little magic.</p>
+   <p>41. Every star represents a thought I wanted to share with you.</p>
+   <p>42. Every little detail was made with you in mind.</p>
+   <p>43. And the heart was waiting for you all along.</p>
+   <p>44. I hope this surprise made you smile.</p>
+   <p>45. I hope you felt the love behind every word.</p>
+   <p>46. Maybe someday we will look back at this page together.</p>
+   <p>47. Maybe we will laugh at how much effort went into it.</p>
+   <p>48. But I hope we will remember how special this moment felt.</p>
+   <p>49. Thank you for being part of my story, Veronica.</p>
+   <p>50. And if I could write one more line, it would simply be: I am so happy our paths crossed.</p>
+
+   <p>With all the love I can put into words,</p>
+  </div>
+
+  <div class="signature">Yours, Omar ♡</div>
+  <br>
+  <button class="primary" onclick="showEnding()">NEXT →</button>
+ </div>
+</section>
+
+<!-- FINAL DARK SCREEN -->
+<section id="ending" class="hidden">
+ <div id="endingContent">
+  <div id="endingWords"></div>
+  <div class="endSmall">A LITTLE UNIVERSE. A SPECIAL STORY. ♡</div>
+ </div>
+</section>
+
+<script>
+const SECRET_CODE="love8";
+
+const starMessages=[
+ {
+  title:"STAR NUMBER ONE ✨",
+  text:"Breaking news: A girl named Veronica has officially stolen the attention of a certain boy named Omar. The suspect is extremely cute and refuses to return it. 😂"
+ },
+ {
+  title:"STAR NUMBER TWO 🌙",
+  text:"A little reminder: You are not allowed to forget how amazing you are. This is an official rule from the Department of Omar's Very Important Feelings. 😌"
+ },
+ {
+  title:"STAR NUMBER THREE 💗",
+  text:"If I received one coin every time you crossed my mind, I would probably be able to buy a whole planet by now. And yes, I would name it Vero. 😂"
+ },
+ {
+  title:"STAR NUMBER FOUR 🌹",
+  text:"Some people make a place beautiful. Some make a moment beautiful. You somehow make a simple conversation feel like a lovely memory."
+ },
+ {
+  title:"STAR NUMBER FIVE ⭐",
+  text:"If the whole universe had a million stars, I would still want to find the one that reminds me of you. And somehow, I think I already found it. ❤️"
+ }
+];
+
+let discovered=[false,false,false,false,false];
+let currentStar=0;
+
+function openName(){
+ document.getElementById("welcome").classList.add("hidden");
+ document.getElementById("nameStep").classList.remove("hidden");
+}
+function checkName(){
+ const name=document.getElementById("visitor").value.trim();
+ if(!name){
+  document.getElementById("error").textContent="Please enter your name.";
+  return;
+ }
+ document.getElementById("nameStep").classList.add("hidden");
+ document.getElementById("codeStep").classList.remove("hidden");
+ document.getElementById("error").textContent="";
+}
+function checkCode(){
+ const code=document.getElementById("secret").value.trim();
+ if(code!==SECRET_CODE){
+  document.getElementById("error").textContent="Incorrect code. Try again!";
+  return;
+ }
+ document.getElementById("intro").classList.add("hidden");
+ document.getElementById("questionIntro").classList.remove("hidden");
+}
+function showChoice(){
+ document.getElementById("questionIntro").classList.add("hidden");
+ document.getElementById("choicePage").classList.remove("hidden");
+}
+const noBtn=document.getElementById("noBtn");
+noBtn.addEventListener("pointerenter",()=>{
+ const x=(Math.random()-.5)*180;
+ const y=(Math.random()-.5)*90;
+ noBtn.style.transform=`translate(${x}px,${y}px)`;
+});
+noBtn.addEventListener("click",()=>{
+ document.getElementById("noHint").textContent=
+ "You caught me! 😄 Your answer is yours, no pressure.";
+});
+function sayYes(){
+ document.getElementById("choicePage").classList.add("hidden");
+ document.getElementById("universe").classList.remove("hidden");
+ floatHearts();
+}
+function openStar(index){
+ currentStar=index;
+ document.getElementById("messageTitle").textContent=starMessages[index].title;
+ document.getElementById("messageText").textContent=starMessages[index].text;
+ document.getElementById("starMessage").classList.remove("hidden");
+}
+function closeStar(){
+ discovered[currentStar]=true;
+ document.getElementById("starMessage").classList.add("hidden");
+ updateStars();
+}
+function updateStars(){
+ let total=discovered.filter(Boolean).length;
+ document.getElementById("progressBar").style.width=(total*20)+"%";
+ document.getElementById("progressText").textContent=
+ total+" / 5 STARS DISCOVERED";
+
+ document.querySelectorAll(".star").forEach((star,i)=>{
+  if(discovered[i]){
+   star.classList.add("done");
+   star.textContent="♥";
+  }
+ });
+
+ if(total===5){
+  const heart=document.getElementById("lockHeart");
+  heart.classList.add("unlocked");
+  document.getElementById("heartIcon").textContent="💖";
+  document.getElementById("lockText").textContent="♡ UNLOCKED ♡";
+  document.getElementById("instruction").textContent=
+   "You found all five stars. Now tap the heart to discover what's inside. 💗";
+ }else{
+  document.getElementById("instruction").textContent=
+   "You have opened "+total+" stars. Keep going until all five are discovered. ✨";
+ }
+}
+function openHeart(){
+ if(!discovered.every(Boolean)){
+  document.getElementById("instruction").textContent=
+   "The heart is still locked. Discover all five stars first! 💗";
+  return;
+ }
+ document.getElementById("universe").classList.add("hidden");
+ document.getElementById("loveLetter").classList.remove("hidden");
+ window.scrollTo(0,0);
+ floatHearts();
+}
+function showEnding(){
+ document.getElementById("loveLetter").classList.add("hidden");
+ document.getElementById("ending").classList.remove("hidden");
+ window.scrollTo(0,0);
+
+ const lines=[
+  "THE LOVE OF",
+  "OMAR",
+  "&",
+  "VERO",
+  "FOREVER ♡"
+ ];
+ const target=document.getElementById("endingWords");
+ let delay=500;
+
+ lines.forEach(line=>{
+  const div=document.createElement("div");
+  div.className="endLine";
+  div.textContent=line;
+  div.style.animationDelay=delay+"ms";
+  target.appendChild(div);
+  delay+=1000;
+ });
+ setTimeout(floatHearts,1000);
+}
+function floatHearts(){
+ const symbols=["♡","♥","✧","✨","💗"];
+ for(let i=0;i<20;i++){
+  setTimeout(()=>{
+   const h=document.createElement("div");
+   h.className="heartRain";
+   h.textContent=symbols[Math.floor(Math.random()*symbols.length)];
+   h.style.left=Math.random()*100+"vw";
+   h.style.fontSize=(16+Math.random()*24)+"px";
+   h.style.color="#ff9bd1";
+   document.body.appendChild(h);
+   setTimeout(()=>h.remove(),6500);
+  },i*180);
+ }
+}
+document.getElementById("visitor").addEventListener("keydown",e=>{
+ if(e.key==="Enter")checkName();
+});
+document.getElementById("secret").addEventListener("keydown",e=>{
+ if(e.key==="Enter")checkCode();
+});
+</script>
+</body>
+</html>
